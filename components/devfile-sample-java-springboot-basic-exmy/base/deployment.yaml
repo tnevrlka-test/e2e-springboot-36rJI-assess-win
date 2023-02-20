@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: devfile-sample-java-springboot-basic-exmy
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: devfile-sample-java-springboot-basic-exmy
+    app.kubernetes.io/part-of: e2e-springboot
+  name: devfile-sample-java-springboot-basic-exmy
+  namespace: e2e-demos-lwtw-tenant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-springboot-app
+      app.kubernetes.io/instance: devfile-sample-java-springboot-basic-exmy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: java-springboot-app
+        app.kubernetes.io/instance: devfile-sample-java-springboot-basic-exmy
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio-qe/test-images-protected:36rJI-devfile-sample-java-springboot-basic-exmy
+        name: my-java-springboot
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 300Mi
+          requests:
+            cpu: 10m
+            memory: 180Mi
+status: {}
